@@ -1,0 +1,46 @@
+name: 获取并解密SS服务器
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # 每6小时运行一次
+  workflow_dispatch:  # 允许手动运行
+
+jobs:
+  fetch-servers:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 检出仓库
+      uses: actions/checkout@v2
+    
+    - name: 设置Python环境
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    
+    - name: 安装依赖
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests pyaes
+    
+    - name: 运行解密脚本
+      id: decrypt
+      env:
+        API_URL: ${{ secrets.API_URL }}
+        DECRYPT_KEY: ${{ secrets.DECRYPT_KEY }}
+        DECRYPT_IV: ${{ secrets.DECRYPT_IV }}
+      run: python ss_decrypt.py
+    
+    - name: 上传结果作为工件
+      uses: actions/upload-artifact@v2
+      with:
+        name: ss-servers
+        path: ss_results.txt
+    
+    - name: 提交并推送结果
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add ss_results.txt
+        git commit -m "更新SS服务器 $(date +'%Y-%m-%d %H:%M:%S')" || echo "没有变更可提交"
+        git push
