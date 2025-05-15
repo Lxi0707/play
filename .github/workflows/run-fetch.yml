@@ -3,7 +3,7 @@ name: Fetch SS Data and Push
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"  # 每天 00:00 运行
+    - cron: "0 0 * * *"
 
 jobs:
   run-script:
@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
