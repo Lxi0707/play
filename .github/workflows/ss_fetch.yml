@@ -2,8 +2,8 @@ name: 获取并解密SS服务器
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # 每6小时运行一次
-  workflow_dispatch:  # 允许手动运行
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
 
 jobs:
   fetch-servers:
@@ -11,10 +11,10 @@ jobs:
     
     steps:
     - name: 检出仓库
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4  # 更新到v4版本
     
     - name: 设置Python环境
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5  # 更新到v5版本
       with:
         python-version: '3.9'
     
@@ -32,7 +32,7 @@ jobs:
       run: python ss_decrypt.py
     
     - name: 上传结果作为工件
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4  # 更新到v4版本
       with:
         name: ss-servers
         path: ss_results.txt
