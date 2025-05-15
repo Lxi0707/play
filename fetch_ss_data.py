@@ -3,7 +3,6 @@ import base64
 import pyaes
 import re
 
-# 解密函数（AES-CBC 模式）
 def decrypt_aes_cbc(encrypted_text, key, iv):
     encrypted_bytes = base64.b64decode(encrypted_text)
     
@@ -15,7 +14,6 @@ def decrypt_aes_cbc(encrypted_text, key, iv):
     
     return decrypted_data[:-decrypted_data[-1]].decode('utf-8')
 
-# 提取 SS 数据并格式化
 def extract_and_format_data(decrypted_data):
     ss_pattern = re.compile(r'SS = ss, ([\d.]+), (\d+),encrypt-method=([\w-]+),password=([\w\d]+)')
     matches = ss_pattern.findall(decrypted_data)
@@ -32,7 +30,6 @@ def extract_and_format_data(decrypted_data):
     
     return results
 
-# 请求并解密 API 数据
 def fetch_and_decrypt():
     url = "http://cnc07api.cnc07.com/api/cnc07iuapis"
     key = "1kv10h7t*C3f8c@$"
@@ -46,15 +43,12 @@ def fetch_and_decrypt():
     
     return extract_and_format_data(decrypted_data) if decrypted_data else []
 
-# 主函数
 def main():
     results = fetch_and_decrypt()
     
-    # 打印结果到终端
     for result in results:
         print(result)
     
-    # 保存结果到 output.txt
     with open("output.txt", "w", encoding="utf-8") as f:
         for result in results:
             f.write(result + "\n")
