@@ -3,7 +3,7 @@ name: Fetch SS Data and Push
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: '0 */2 * * *'  # 每2小时运行一次
 
 jobs:
   run-script:
