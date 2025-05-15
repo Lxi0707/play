@@ -49,7 +49,7 @@ def main():
     for result in results:
         print(result)
     
-    with open("output.txt", "w", encoding="utf-8") as f:
+    with open("ss.txt", "w", encoding="utf-8") as f:
         for result in results:
             f.write(result + "\n")
 
