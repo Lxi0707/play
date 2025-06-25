@@ -7,7 +7,7 @@
 重写:打开小程序，进入我的页面，点击优惠券页面获取token。支持多账号。
 
 [rewrite_local]
-^https:\/\/mcs-mimp-web\.sf-express\.com\/mcs-mimp\/share\/app\/shareRedirect url script-request-body https://raw.githubusercontent.com/Lxi0707/yinsi/refs/heads/main/sf.js?token=GHSAT0AAAAAADES56WN3A5UISN3UJQQ4OCU2CKSOZQ
+^https:\/\/mcs-mimp-web\.sf-express\.com\/mcs-mimp\/share\/app\/shareRedirect url script-request-body https://raw.githubusercontent.com/Lxi0707/play/refs/heads/main/sf/sfsy.js
 
 
 [MITM]
